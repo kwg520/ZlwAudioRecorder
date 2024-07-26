@@ -1,10 +1,30 @@
-apply plugin: 'com.android.library'
-//apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.zhaolewei'
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+}
+
+group='com.github.kwg520'
+version = '2.1.1'
+afterEvaluate {
+    publishing {
+        publications {
+            // 这个mavenJava可以随便填，只是一个任务名字而已
+            // MavenPublication必须有，这个是调用的任务类
+            release(MavenPublication) {
+                // 这里头是artifacts的配置信息，不填会采用默认的
+                from components.release
+                groupId = 'com.github.kwg520'
+                artifactId = 'ZlwAudioRecorder'
+                version = '2.1.1'
+            }
+        }
+    }
+}
 
 android {
     namespace = "com.zlw.main.recorderlib"
-    compileSdkVersion 33
+    compileSdk 33
     defaultConfig {
         minSdkVersion 16
         versionCode 1
